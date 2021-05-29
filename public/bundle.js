@@ -11692,8 +11692,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
 /* harmony import */ var preact_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact-router */ "./node_modules/preact-router/dist/preact-router.es.js");
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./text */ "./src/text.jsx");
 
 
+
+
+
+class App extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  render(props, state) {
+    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      maxWidth: "sm"
+    }, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact_router__WEBPACK_IMPORTED_MODULE_1__["Router"], null, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_text__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      path: "/",
+      text: "Esto es un texto.\nY solamente eso, un texto."
+    })));
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./src/app.jsx");
+
+
+Object(preact__WEBPACK_IMPORTED_MODULE_0__["render"])(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_app__WEBPACK_IMPORTED_MODULE_1__["default"], null), document.getElementById('root'));
+
+/***/ }),
+
+/***/ "./src/text.jsx":
+/*!**********************!*\
+  !*** ./src/text.jsx ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
 
 
 class Part extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
@@ -11781,36 +11828,7 @@ class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 }
 
-class App extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  render(props, state) {
-    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      maxWidth: "sm"
-    }, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact_router__WEBPACK_IMPORTED_MODULE_1__["Router"], null, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Text, {
-      path: "/",
-      text: "Esto es un texto.\nY solamente eso, un texto."
-    })));
-  }
-
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (App);
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./src/app.jsx");
-
-
-Object(preact__WEBPACK_IMPORTED_MODULE_0__["render"])(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_app__WEBPACK_IMPORTED_MODULE_1__["default"], null), document.getElementById('root'));
+/* harmony default export */ __webpack_exports__["default"] = (Text);
 
 /***/ })
 
