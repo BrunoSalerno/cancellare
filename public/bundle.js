@@ -11696,9 +11696,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class Home extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+class Part extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render(props, state) {
-    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("p", null, "Ciao");
+    if (props.content == "\n") {
+      return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("br", null);
+    }
+
+    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("span", null, props.content);
+  }
+
+}
+
+class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  getPartsFromString(arr, character) {
+    const newArr = [];
+    arr.map(element => {
+      const newParts = element.props.content.split(character);
+      const newPartsLength = newParts.length;
+      newParts.map((part, i) => {
+        newArr.push(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
+          content: part
+        }));
+
+        if (i + 1 < newPartsLength) {
+          newArr.push(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
+            content: character
+          }));
+        }
+      });
+    });
+    return newArr;
+  }
+
+  getTextParts(text) {
+    let parts = this.getPartsFromString([Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
+      content: text
+    })], "\n");
+    parts = this.getPartsFromString(parts, " ");
+    parts = this.getPartsFromString(parts, ",");
+    console.log(parts);
+    return parts;
+  }
+
+  render(props, state) {
+    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, this.getTextParts(this.props.text));
   }
 
 }
@@ -11707,8 +11748,9 @@ class App extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render(props, state) {
     return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
       maxWidth: "sm"
-    }, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact_router__WEBPACK_IMPORTED_MODULE_1__["Router"], null, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Home, {
-      path: "/"
+    }, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact_router__WEBPACK_IMPORTED_MODULE_1__["Router"], null, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Text, {
+      path: "/",
+      text: "Esto es un texto.\nY solamente eso, un texto"
     })));
   }
 
