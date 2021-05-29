@@ -5,11 +5,24 @@ import { Router, route } from 'preact-router';
 import Container from '@material-ui/core/Container';
 
 class Part extends Component {
+  handleClick() {
+    this.props.onClick(this.props.index);
+  }
+
+  getStyle() {
+    if (this.props.deleted) {
+      return {backgroundColor: "black"};
+    }
+    return {}
+  }
+
   render(props, state) {
     if (props.content == "\n") {
       return <br />;
     }
-    return <span>{props.content}</span>;
+    return <span style={this.getStyle()} onClick={this.handleClick.bind(this)}>
+      {props.content}
+    </span>;
   }
 }
 
@@ -17,7 +30,7 @@ class Part extends Component {
 class Text extends Component {
   constructor(props) {
     super(props);
-    this.state = {parts: this.getTextParts(props.text)}
+    this.state = {parts: this.getTextParts(props.text), deleted: new Set()}
   }
 
   getPartsFromString(arr, character) {
@@ -44,10 +57,22 @@ class Text extends Component {
     return parts
   }
 
+  handleClick(index) {
+    const deleted = this.state.deleted;
+    if (deleted.has(index)) {
+      deleted.delete(index);
+    } else {
+      deleted.add(index);
+    }
+    this.setState({deleted: deleted});
+  }
+
   render(props, state) {
     return (
       <div>
-        {this.state.parts.map(part => <Part content={part} />)}
+        {this.state.parts.map((part, i) =>
+          <Part content={part} index={i} deleted={state.deleted.has(i)} onClick={this.handleClick.bind(this)}/>
+        )}
       </div>
     )
   }

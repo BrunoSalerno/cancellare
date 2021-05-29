@@ -11697,12 +11697,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Part extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  handleClick() {
+    this.props.onClick(this.props.index);
+  }
+
+  getStyle() {
+    if (this.props.deleted) {
+      return {
+        backgroundColor: "black"
+      };
+    }
+
+    return {};
+  }
+
   render(props, state) {
     if (props.content == "\n") {
       return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("br", null);
     }
 
-    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("span", null, props.content);
+    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("span", {
+      style: this.getStyle(),
+      onClick: this.handleClick.bind(this)
+    }, props.content);
   }
 
 }
@@ -11711,7 +11728,8 @@ class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
     this.state = {
-      parts: this.getTextParts(props.text)
+      parts: this.getTextParts(props.text),
+      deleted: new Set()
     };
   }
 
@@ -11737,13 +11755,29 @@ class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     characters.map(character => {
       parts = this.getPartsFromString(parts, character);
     });
-    console.log(parts);
     return parts;
   }
 
+  handleClick(index) {
+    const deleted = this.state.deleted;
+
+    if (deleted.has(index)) {
+      deleted.delete(index);
+    } else {
+      deleted.add(index);
+    }
+
+    this.setState({
+      deleted: deleted
+    });
+  }
+
   render(props, state) {
-    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, this.state.parts.map(part => Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
-      content: part
+    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, this.state.parts.map((part, i) => Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
+      content: part,
+      index: i,
+      deleted: state.deleted.has(i),
+      onClick: this.handleClick.bind(this)
     })));
   }
 
