@@ -1,4 +1,5 @@
 import { Component, h } from 'preact';
+import { route } from 'preact-router';
 
 
 class Part extends Component {
@@ -58,6 +59,12 @@ class Text extends Component {
     return parts
   }
 
+  updateQueryString() {
+    const text = encodeURIComponent(this.props.text);
+    const deleted = Array.from(this.state.deleted).sort().join(",");
+    route(`/text?text=${text}&deleted=${deleted}`, true);
+  }
+
   handleClick(index) {
     const deleted = this.state.deleted;
     if (deleted.has(index)) {
@@ -65,7 +72,7 @@ class Text extends Component {
     } else {
       deleted.add(index);
     }
-    this.setState({deleted: deleted});
+    this.setState({deleted: deleted}, this.updateQueryString);
   }
 
   render(props, state) {
