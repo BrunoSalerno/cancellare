@@ -1,6 +1,7 @@
 .part {
   font-size: 25px;
   cursor: pointer;
+  user-select: none;
 }
 
 .part.deleted {
