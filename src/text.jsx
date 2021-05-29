@@ -1,6 +1,9 @@
 import { Component, h } from 'preact';
 import { route } from 'preact-router';
 
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+
 
 class Part extends Component {
   handleClick() {
@@ -77,11 +80,16 @@ class Text extends Component {
 
   render(props, state) {
     return (
-      <div>
-        {this.state.parts.map((part, i) =>
-          <Part content={part} index={i} deleted={state.deleted.has(i)} onClick={this.handleClick.bind(this)}/>
-        )}
-      </div>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          {this.state.parts.map((part, i) =>
+            <Part content={part} index={i} deleted={state.deleted.has(i)} onClick={this.handleClick.bind(this)}/>
+          )}
+        </Grid>
+        <Grid item xs={12}>
+          <Link href="/">Caricare testo</Link>
+        </Grid>
+      </Grid>
     )
   }
 }
