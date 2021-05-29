@@ -4,6 +4,8 @@ import { route } from 'preact-router';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 
+import { buildQueryString } from './helpers';
+
 
 class Part extends Component {
   handleClick() {
@@ -62,10 +64,12 @@ class Text extends Component {
     return parts
   }
 
-  updateQueryString() {
-    const text = encodeURIComponent(this.props.text);
-    const deleted = Array.from(this.state.deleted).sort().join(",");
-    route(`/text?text=${text}&deleted=${deleted}`, true);
+  buildQueryString() {
+    return buildQueryString(this.props.text, this.state.deleted);
+  }
+
+  updateHistory() {
+    route(`/text?${this.buildQueryString()}`, true);
   }
 
   handleClick(index) {
@@ -75,7 +79,7 @@ class Text extends Component {
     } else {
       deleted.add(index);
     }
-    this.setState({deleted: deleted}, this.updateQueryString);
+    this.setState({deleted: deleted}, this.updateHistory);
   }
 
   render(props, state) {
@@ -87,7 +91,14 @@ class Text extends Component {
           )}
         </Grid>
         <Grid item xs={12}>
-          <Link href="/">Caricare testo</Link>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <Link href={`/?${this.buildQueryString()}`}>Modificate testo</Link>
+            </Grid>
+            <Grid item xs={12}>
+              <Link href="/">Caricare un nuovo testo</Link>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     )
