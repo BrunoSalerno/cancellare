@@ -23,9 +23,7 @@
     "@material-ui/core": "^4.10.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "diacritic": "0.0.2",
     "preact": "^10.4.4",
-    "preact-render-to-string": "^5.1.9",
     "preact-router": "^3.2.1",
     "webpack": "^4.43.0"
   },
