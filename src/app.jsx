@@ -9,18 +9,18 @@ class Part extends Component {
     this.props.onClick(this.props.index);
   }
 
-  getStyle() {
+  getExtraClasses() {
     if (this.props.deleted) {
-      return {backgroundColor: "black"};
+      return "deleted";
     }
-    return {}
+    return "";
   }
 
   render(props, state) {
     if (props.content == "\n") {
       return <br />;
     }
-    return <span style={this.getStyle()} onClick={this.handleClick.bind(this)}>
+    return <span className={`part ${this.getExtraClasses()}`} onClick={this.handleClick.bind(this)}>
       {props.content}
     </span>;
   }

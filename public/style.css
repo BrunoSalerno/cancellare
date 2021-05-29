@@ -1,0 +1,7 @@
+.part {
+  cursor: pointer;
+}
+
+.part.deleted {
+  background-color: black;
+}

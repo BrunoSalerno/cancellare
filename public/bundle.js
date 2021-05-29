@@ -11701,14 +11701,12 @@ class Part extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     this.props.onClick(this.props.index);
   }
 
-  getStyle() {
+  getExtraClasses() {
     if (this.props.deleted) {
-      return {
-        backgroundColor: "black"
-      };
+      return "deleted";
     }
 
-    return {};
+    return "";
   }
 
   render(props, state) {
@@ -11717,7 +11715,7 @@ class Part extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }
 
     return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("span", {
-      style: this.getStyle(),
+      className: `part ${this.getExtraClasses()}`,
       onClick: this.handleClick.bind(this)
     }, props.content);
   }
