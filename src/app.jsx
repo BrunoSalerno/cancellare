@@ -15,15 +15,20 @@ class Part extends Component {
 
 
 class Text extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {parts: this.getTextParts(props.text)}
+  }
+
   getPartsFromString(arr, character) {
     const newArr = [];
     arr.map(element => {
-      const newParts = element.props.content.split(character);
-      const newPartsLength = newParts.length
+      const newParts = element.split(character);
+      const newPartsLength = newParts.length;
       newParts.map((part, i) => {
-        newArr.push(<Part content={part}/>);
+        newArr.push(part);
         if (i + 1 < newPartsLength) {
-          newArr.push(<Part content={character}/>)
+          newArr.push(character)
         }
       });
     });
@@ -31,7 +36,7 @@ class Text extends Component {
   }
 
   getTextParts(text) {
-    let parts = [<Part content={text}/>];
+    let parts = [text];
     const characters = ["\n", " ", ",", ";", "."];
     characters.map(character => {
       parts = this.getPartsFromString(parts, character);
@@ -41,7 +46,9 @@ class Text extends Component {
 
   render(props, state) {
     return (
-      <div>{this.getTextParts(this.props.text)}</div>
+      <div>
+        {this.state.parts.map(part => <Part content={part} />)}
+      </div>
     )
   }
 }

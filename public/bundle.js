@@ -11708,22 +11708,23 @@ class Part extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 }
 
 class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(props) {
+    super(props);
+    this.state = {
+      parts: this.getTextParts(props.text)
+    };
+  }
+
   getPartsFromString(arr, character) {
     const newArr = [];
     arr.map(element => {
-      const newParts = element.props.content.split(character);
+      const newParts = element.split(character);
       const newPartsLength = newParts.length;
       newParts.map((part, i) => {
-        newArr.push(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
-          content: part,
-          index: i
-        }));
+        newArr.push(part);
 
         if (i + 1 < newPartsLength) {
-          newArr.push(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
-            content: character,
-            index: i
-          }));
+          newArr.push(character);
         }
       });
     });
@@ -11731,21 +11732,19 @@ class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   getTextParts(text) {
-    let parts = [Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
-      content: text
-    })];
+    let parts = [text];
     const characters = ["\n", " ", ",", ";", "."];
     characters.map(character => {
       parts = this.getPartsFromString(parts, character);
     });
-    parts.map(part => {
-      console.log(part.props.content, part.props.index);
-    });
+    console.log(parts);
     return parts;
   }
 
   render(props, state) {
-    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, this.getTextParts(this.props.text));
+    return Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, this.state.parts.map(part => Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
+      content: part
+    })));
   }
 
 }
