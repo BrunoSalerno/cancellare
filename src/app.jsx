@@ -4,6 +4,7 @@ import { Router, route } from 'preact-router';
 import Container from '@material-ui/core/Container';
 
 import Text from './text';
+import TextLoader from './text_loader';
 
 
 class App extends Component {
@@ -11,7 +12,8 @@ class App extends Component {
     return (
       <Container maxWidth="sm">
           <Router>
-            <Text path="/" text="Esto es un texto.\nY solamente eso, un texto."/>
+            <TextLoader path="/" />
+            <Text path="/text" />
           </Router>
       </Container>
     );

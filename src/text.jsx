@@ -27,7 +27,12 @@ class Part extends Component {
 class Text extends Component {
   constructor(props) {
     super(props);
-    this.state = {parts: this.getTextParts(props.text), deleted: new Set()}
+    this.CHARACTERS = ["\n", " ", ",", ";", ".", "“", "”", "\""];
+    const deleted = props.deleted ? props.deleted.split(",").map(d => parseInt(d)) : null;
+    this.state = {
+      parts: this.getTextParts(props.text),
+      deleted: new Set(deleted)
+    };
   }
 
   getPartsFromString(arr, character) {
@@ -47,8 +52,7 @@ class Text extends Component {
 
   getTextParts(text) {
     let parts = [text];
-    const characters = ["\n", " ", ",", ";", "."];
-    characters.map(character => {
+    this.CHARACTERS.map(character => {
       parts = this.getPartsFromString(parts, character);
     });
     return parts
