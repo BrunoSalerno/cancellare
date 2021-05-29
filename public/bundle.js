@@ -11715,12 +11715,14 @@ class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const newPartsLength = newParts.length;
       newParts.map((part, i) => {
         newArr.push(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
-          content: part
+          content: part,
+          index: i
         }));
 
         if (i + 1 < newPartsLength) {
           newArr.push(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
-            content: character
+            content: character,
+            index: i
           }));
         }
       });
@@ -11729,12 +11731,16 @@ class Text extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   getTextParts(text) {
-    let parts = this.getPartsFromString([Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
+    let parts = [Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Part, {
       content: text
-    })], "\n");
-    parts = this.getPartsFromString(parts, " ");
-    parts = this.getPartsFromString(parts, ",");
-    console.log(parts);
+    })];
+    const characters = ["\n", " ", ",", ";", "."];
+    characters.map(character => {
+      parts = this.getPartsFromString(parts, character);
+    });
+    parts.map(part => {
+      console.log(part.props.content, part.props.index);
+    });
     return parts;
   }
 
@@ -11750,7 +11756,7 @@ class App extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       maxWidth: "sm"
     }, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact_router__WEBPACK_IMPORTED_MODULE_1__["Router"], null, Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Text, {
       path: "/",
-      text: "Esto es un texto.\nY solamente eso, un texto"
+      text: "Esto es un texto.\nY solamente eso, un texto."
     })));
   }
 

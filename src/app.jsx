@@ -31,10 +31,11 @@ class Text extends Component {
   }
 
   getTextParts(text) {
-    let parts = this.getPartsFromString([<Part content={text}/>], "\n");
-    parts = this.getPartsFromString(parts, " ");
-    parts = this.getPartsFromString(parts, ",");
-    console.log(parts)
+    let parts = [<Part content={text}/>];
+    const characters = ["\n", " ", ",", ";", "."];
+    characters.map(character => {
+      parts = this.getPartsFromString(parts, character);
+    });
     return parts
   }
 
@@ -51,7 +52,7 @@ class App extends Component {
     return (
       <Container maxWidth="sm">
           <Router>
-            <Text path="/" text="Esto es un texto.\nY solamente eso, un texto"/>
+            <Text path="/" text="Esto es un texto.\nY solamente eso, un texto."/>
           </Router>
       </Container>
     );
