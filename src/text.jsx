@@ -61,7 +61,7 @@ class Text extends Component {
     this.CHARACTERS.map(character => {
       parts = this.getPartsFromString(parts, character);
     });
-    return parts
+    return parts;
   }
 
   buildQueryString() {
