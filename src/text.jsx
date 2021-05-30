@@ -93,7 +93,7 @@ class Text extends Component {
         <Grid item xs={12}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Link href={`/?${this.buildQueryString()}`}>Modificate testo</Link>
+              <Link href={`/?${this.buildQueryString()}`}>Modificare testo</Link>
             </Grid>
             <Grid item xs={12}>
               <Link href="/">Caricare un nuovo testo</Link>
