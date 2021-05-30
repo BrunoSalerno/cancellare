@@ -33,7 +33,7 @@ class Part extends Component {
 class Text extends Component {
   constructor(props) {
     super(props);
-    this.CHARACTERS = ["\n", " ", ",", ";", ".", "“", "”", "\"", "-", "—", ")", "("];
+    this.CHARACTERS = ["\n", " ", ",", ";", ".", "“", "”", "\"", "-", "—", ")", "(", "’", "'", "`", "´"];
     const deleted = props.deleted ? props.deleted.split(",").map(d => parseInt(d)) : null;
     this.state = {
       parts: this.getTextParts(props.text),
